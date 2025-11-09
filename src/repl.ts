@@ -1,5 +1,4 @@
-import { createInterface } from "node:readline";
-import { getCommands } from "./command_list.js";
+import { type State } from "./state.js";
 
 export function cleanInput(input: string): string[] {
 	const words = input.trim().split(" ");
@@ -7,13 +6,9 @@ export function cleanInput(input: string): string[] {
 	return wordsLowered;
 }
 
-export function startREPL() {
-	const rl = createInterface({
-		input: process.stdin,
-		output: process.stdout,
-		prompt: "pokedex > ",
-	})
-	const commands = getCommands();
+export function startREPL(state: State) {
+	const rl = state.readline;
+	const commands = state.commands;
 
 	rl.prompt();
 	rl.on("line", async (input: string) => {
@@ -24,7 +19,7 @@ export function startREPL() {
 		const userInput: string[] = cleanInput(input);
 		const userCommand = userInput[0];
 		if (userCommand in commands) {
-			commands[userCommand].callback(commands);
+			commands[userCommand].callback(state);
 			rl.prompt();
 		} else {
 			console.log(`Unknown command: "${userCommand}". Type "help" for a list of commands.`);
