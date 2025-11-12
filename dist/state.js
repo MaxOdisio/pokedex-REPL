@@ -1,12 +1,20 @@
 import { createInterface } from "node:readline";
 import { getCommands } from "./commands.js";
-export function initState() {
+import { PokeAPI } from "./pokeapi.js";
+export async function initState() {
+    // Creates Readline Interface
     const rl = createInterface({
         input: process.stdin,
         output: process.stdout,
         prompt: "pokedex > ",
     });
-    const cmdList = getCommands();
-    const state = { readline: rl, commands: cmdList };
-    return state;
+    // Sets up PokeAPI object and locations
+    const pokeapi = new PokeAPI;
+    return {
+        readline: rl,
+        commands: getCommands(),
+        pokeapi: pokeapi,
+        nextLocationsURL: "",
+        prevLocationsURL: null,
+    };
 }

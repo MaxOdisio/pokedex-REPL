@@ -7,23 +7,25 @@ export function cleanInput(input: string): string[] {
 }
 
 export function startREPL(state: State) {
-	const rl = state.readline;
-	const commands = state.commands;
-
-	rl.prompt();
-	rl.on("line", async (input: string) => {
-		if (!input) {
-			rl.prompt();
+	state.readline.prompt();
+	state.readline.on("line", async (input: string) => {
+		const words = cleanInput(input);
+		if (words.length === 0) {
+			state.readline.prompt();
 			return;
 		}
-		const userInput: string[] = cleanInput(input);
-		const userCommand = userInput[0];
-		if (userCommand in commands) {
-			commands[userCommand].callback(state);
-			rl.prompt();
-		} else {
-			console.log(`Unknown command: "${userCommand}". Type "help" for a list of commands.`);
-			rl.prompt();
+		const commandName = words[0];
+		const cmd = state.commands[commandName];
+		if (!cmd) {
+			console.log(`Unknown command: "${commandName}". Type "help" for a list of commands.`);
+			state.readline.prompt();
+			return
 		}
+		try {
+			await cmd.callback(state);
+		} catch (e) {
+			console.log(e);
+		}
+		state.readline.prompt();
 	});
 }
