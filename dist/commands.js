@@ -1,7 +1,6 @@
 import { commandExit } from "./command_exit.js";
 import { commandHelp } from "./command_help.js";
-import { commandMap } from "./command_map.js";
-import { commandMapB } from "./command_mapb.js";
+import { commandMapForward, commandMapBack } from "./command_map.js";
 export function getCommands() {
     return {
         exit: {
@@ -17,12 +16,12 @@ export function getCommands() {
         map: {
             name: "map",
             description: "Displays map locations",
-            callback: commandMap,
+            callback: commandMapForward,
         },
         mapb: {
             name: "mapb",
             description: "Displays previous map locations",
-            callback: commandMapB,
+            callback: commandMapBack,
         }
     };
 }

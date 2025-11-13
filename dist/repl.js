@@ -3,7 +3,7 @@ export function cleanInput(input) {
     const wordsLowered = words.map((word) => word.toLowerCase());
     return wordsLowered;
 }
-export function startREPL(state) {
+export async function startREPL(state) {
     state.readline.prompt();
     state.readline.on("line", async (input) => {
         const words = cleanInput(input);
@@ -22,7 +22,7 @@ export function startREPL(state) {
             await cmd.callback(state);
         }
         catch (e) {
-            console.log(e);
+            console.log(e.message);
         }
         state.readline.prompt();
     });

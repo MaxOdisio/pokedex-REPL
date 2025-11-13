@@ -6,14 +6,16 @@ export function cleanInput(input: string): string[] {
 	return wordsLowered;
 }
 
-export function startREPL(state: State) {
+export async function startREPL(state: State) {
 	state.readline.prompt();
-	state.readline.on("line", async (input: string) => {
+
+	state.readline.on("line", async (input) => {
 		const words = cleanInput(input);
 		if (words.length === 0) {
 			state.readline.prompt();
 			return;
 		}
+
 		const commandName = words[0];
 		const cmd = state.commands[commandName];
 		if (!cmd) {
@@ -21,10 +23,11 @@ export function startREPL(state: State) {
 			state.readline.prompt();
 			return
 		}
+
 		try {
 			await cmd.callback(state);
 		} catch (e) {
-			console.log(e);
+			console.log((e as Error).message);
 		}
 		state.readline.prompt();
 	});
