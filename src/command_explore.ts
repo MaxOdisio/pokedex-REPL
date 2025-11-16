@@ -1,16 +1,16 @@
 import { State } from "./state.js";
 
 export async function commandExplore(state: State, ...args: string[]) {
-	const loc = await state.pokeAPI.fetchLocation(args[0]);
-	console.log(`Exploring ${loc.location.name}...`);
-	const pkms = loc.pokemon_encounters;
-
-	if (!pkms || pkms.length === 0) {
-		throw new Error(`No pokemon found at ${loc.location.name}`);
+	if (args.length !== 1) {
+		throw new Error("you must provide a location name");
 	}
 
+	const name = args[0];
+	const location = await state.pokeAPI.fetchLocation(name);
+
+	console.log(`Exploring ${location.location.name}...`);
 	console.log("Found Pokemon:");
-	for (const pkm of pkms) {
+	for (const pkm of location.pokemon_encounters) {
 		const name = pkm.pokemon.name;
 		console.log(`- ${name}`);
 	}

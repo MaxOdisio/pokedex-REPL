@@ -25,8 +25,8 @@ export function getCommands() {
             callback: commandMapBack,
         },
         explore: {
-            name: "explore",
-            description: "Displays location's Pokemon encounters",
+            name: "explore <location_name>",
+            description: "Explore a location",
             callback: commandExplore,
         },
     };

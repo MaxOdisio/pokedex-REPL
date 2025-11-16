@@ -17,14 +17,13 @@ export async function startREPL(state: State) {
 		}
 
 		const commandName = words[0];
+		const args = words.slice(1);
 		const cmd = state.commands[commandName];
 		if (!cmd) {
 			console.log(`Unknown command: "${commandName}". Type "help" for a list of commands.`);
 			state.readline.prompt();
 			return
 		}
-
-		let args = words.slice(1);
 
 		try {
 			await cmd.callback(state, ...args);
