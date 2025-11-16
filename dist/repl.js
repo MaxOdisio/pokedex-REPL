@@ -18,8 +18,9 @@ export async function startREPL(state) {
             state.readline.prompt();
             return;
         }
+        let args = words.slice(1);
         try {
-            await cmd.callback(state);
+            await cmd.callback(state, ...args);
         }
         catch (e) {
             console.log(e.message);
