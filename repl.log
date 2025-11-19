@@ -2,16 +2,6 @@
 > pokedex@1.0.0 dev
 > npx tsc && node dist/main.js
 
-pokedex > Exploring pastoria-city...
-Found Pokemon:
-- tentacool
-- tentacruel
-- magikarp
-- gyarados
-- remoraid
-- octillery
-- wingull
-- pelipper
-- shellos
-- gastrodon
+pokedex > Throwing a Pokeball at squirtle...
+Noice, you have a squirtle now!
 pokedex > Closing the Pokedex... Goodbye!
