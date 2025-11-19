@@ -5,7 +5,7 @@ export function initState(cacheInterval) {
     const rl = createInterface({
         input: process.stdin,
         output: process.stdout,
-        prompt: "pokedex > ",
+        prompt: "Pokedex > ",
     });
     return {
         readline: rl,

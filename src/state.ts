@@ -21,7 +21,7 @@ export function initState(cacheInterval: number) {
 	const rl = createInterface({
 		input: process.stdin,
 		output: process.stdout,
-		prompt: "pokedex > ",
+		prompt: "Pokedex > ",
 	});
 
 	return {
