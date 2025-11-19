@@ -3,6 +3,7 @@ import { commandHelp } from "./command_help.js";
 import { commandMapForward, commandMapBack } from "./command_map.js";
 import { commandExplore } from "./command_explore.js";
 import { commandCatch } from "./command_catch.js";
+import { commandInspect } from "./command_inspect.js";
 export function getCommands() {
     return {
         exit: {
@@ -34,6 +35,11 @@ export function getCommands() {
             name: "catch <pokemon_name>",
             description: "Attempt to catch a pokemon",
             callback: commandCatch,
+        },
+        inspect: {
+            name: "inspect <pokemon_name>",
+            description: "Inspect a catched pokemon",
+            callback: commandInspect,
         },
     };
 }
