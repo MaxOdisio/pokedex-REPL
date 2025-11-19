@@ -2,6 +2,7 @@ import { commandExit } from "./command_exit.js";
 import { commandHelp } from "./command_help.js";
 import { commandMapForward, commandMapBack } from "./command_map.js";
 import { commandExplore } from "./command_explore.js";
+import { commandCatch } from "./command_catch.js";
 export function getCommands() {
     return {
         exit: {
@@ -28,6 +29,11 @@ export function getCommands() {
             name: "explore <location_name>",
             description: "Explore a location",
             callback: commandExplore,
+        },
+        catch: {
+            name: "catch <pokemon_name>",
+            description: "Catch a pokemon",
+            callback: commandCatch,
         },
     };
 }
